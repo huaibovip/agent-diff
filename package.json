@@ -1,0 +1,110 @@
+{
+  "name": "agent-differ",
+  "displayName": "Agnet Differ",
+  "description": "Review all file changes made by Claude Code sessions with diffs and one-click revert",
+  "version": "1.0.0",
+  "publisher": "Huaibo",
+  "icon": "resources/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/panfotis/agent-differ"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "claude",
+    "claude code",
+    "checkpoints",
+    "diff",
+    "revert",
+    "AI",
+    "changes"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onView:AgnetDiffer"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "agent-differ",
+          "title": "Agnet Differ",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "agent-differ": [
+        {
+          "id": "AgnetDiffer",
+          "name": "Changes",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "AgnetDiffer.refresh",
+        "title": "Refresh Changes",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "AgnetDiffer.viewDiff",
+        "title": "View Changes",
+        "icon": "$(diff)"
+      },
+      {
+        "command": "AgnetDiffer.viewFile",
+        "title": "View File",
+        "icon": "$(file)"
+      },
+      {
+        "command": "AgnetDiffer.restoreFile",
+        "title": "Restore File",
+        "icon": "$(discard)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "AgnetDiffer.refresh",
+          "when": "view == AgnetDiffer",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "AgnetDiffer.viewDiff",
+          "when": "view == AgnetDiffer && viewItem == checkpointFile",
+          "group": "inline"
+        },
+        {
+          "command": "AgnetDiffer.viewFile",
+          "when": "view == AgnetDiffer && viewItem == checkpointFile"
+        },
+        {
+          "command": "AgnetDiffer.restoreFile",
+          "when": "view == AgnetDiffer && viewItem == checkpointFile"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  }
+}
