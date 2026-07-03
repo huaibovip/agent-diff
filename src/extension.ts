@@ -10,7 +10,7 @@ import {
 import { CheckpointWebviewProvider } from "./checkpointWebviewProvider";
 import { readBackupFile, findSessionsForWorkspace, getCumulativeChanges } from "./checkpointService";
 
-const log = vscode.window.createOutputChannel("Agnet Differ");
+const log = vscode.window.createOutputChannel("Agent Diff");
 
 function parseBackupVersion(backupFileName: string | null | undefined): number | null {
   if (!backupFileName) {
@@ -44,7 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   // Refresh command
   context.subscriptions.push(
-    vscode.commands.registerCommand("AgnetDiffer.refresh", () => {
+    vscode.commands.registerCommand("AgentDiff.refresh", () => {
       webviewProvider.refresh();
     })
   );
@@ -97,7 +97,7 @@ export function activate(context: vscode.ExtensionContext) {
   // View diff command (from webview messages)
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "AgnetDiffer.viewDiffData",
+      "AgentDiff.viewDiffData",
       async (
         sessionId: string,
         _filePath: string,
@@ -210,7 +210,7 @@ export function activate(context: vscode.ExtensionContext) {
   // Restore file command (from webview messages)
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "AgnetDiffer.restoreFileData",
+      "AgentDiff.restoreFileData",
       async (
         sessionId: string,
         absolutePath: string,
@@ -220,7 +220,7 @@ export function activate(context: vscode.ExtensionContext) {
         if (!backupFileName) {
           // File was created by Claude — offer to delete it
           await vscode.commands.executeCommand(
-            "AgnetDiffer.deleteFileData",
+            "AgentDiff.deleteFileData",
             absolutePath,
             sessionId
           );
@@ -267,7 +267,7 @@ export function activate(context: vscode.ExtensionContext) {
   // Delete file command (for files created by Claude)
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "AgnetDiffer.deleteFileData",
+      "AgentDiff.deleteFileData",
       async (absolutePath: string, sessionId?: string) => {
         log.appendLine(`deleteFileData called: ${absolutePath}`);
         const fileName = path.basename(absolutePath);
@@ -313,7 +313,7 @@ export function activate(context: vscode.ExtensionContext) {
   // Revert All command
   context.subscriptions.push(
     vscode.commands.registerCommand(
-      "AgnetDiffer.revertAllData",
+      "AgentDiff.revertAllData",
       async (sessionId: string) => {
         if (!workspacePath) {
           return;

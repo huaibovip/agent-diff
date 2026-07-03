@@ -13,7 +13,7 @@ import {
 import { getEmptyWebviewHtml, getWebviewHtml } from "./webviewTemplate";
 
 export class CheckpointWebviewProvider implements vscode.WebviewViewProvider {
-  public static readonly viewType = "AgnetDiffer";
+  public static readonly viewType = "AgentDiff";
   private _view?: vscode.WebviewView;
   private _revertedFiles = new Set<string>();
 
@@ -66,7 +66,7 @@ export class CheckpointWebviewProvider implements vscode.WebviewViewProvider {
       switch (message.command) {
         case "viewDiff":
           vscode.commands.executeCommand(
-            "AgnetDiffer.viewDiffData",
+            "AgentDiff.viewDiffData",
             message.sessionId,
             message.filePath,
             message.absolutePath,
@@ -79,7 +79,7 @@ export class CheckpointWebviewProvider implements vscode.WebviewViewProvider {
           break;
         case "restoreFile":
           vscode.commands.executeCommand(
-            "AgnetDiffer.restoreFileData",
+            "AgentDiff.restoreFileData",
             message.sessionId,
             message.absolutePath,
             message.backupFileName,
@@ -88,13 +88,13 @@ export class CheckpointWebviewProvider implements vscode.WebviewViewProvider {
           break;
         case "revertAll":
           vscode.commands.executeCommand(
-            "AgnetDiffer.revertAllData",
+            "AgentDiff.revertAllData",
             message.sessionId
           );
           break;
         case "deleteFile":
           vscode.commands.executeCommand(
-            "AgnetDiffer.deleteFileData",
+            "AgentDiff.deleteFileData",
             message.absolutePath,
             message.sessionId
           );
@@ -201,19 +201,14 @@ export class CheckpointWebviewProvider implements vscode.WebviewViewProvider {
               ${title}
             </div>
             <div class="session-meta">
+              <span>${dateStr}, ${timeStr}</span>
               <span class="badge"${hiddenCheckpointTooltip}>${timelineCountLabel}</span>
               <span class="badge">${netChangedCount} file${netChangedCount !== 1 ? "s" : ""}</span>
-              <span>${dateStr}, ${timeStr}</span>
             </div>
           </div>
         </div>
         <div class="session-body">
           <div class="session-item collapsed" data-session-id="${this._escapeAttr(session.sessionId)}" data-toggle-id="all-changes">
-            <div style="display: none; align-items: center;">
-              <span>All Changes</span>
-              <span class="badge">${netChangedCount} file${netChangedCount !== 1 ? "s" : ""}</span>
-              <button class="revert-all-btn" data-session-id="${this._escapeAttr(session.sessionId)}" title="Revert all files to before this session">&#x21A9; Revert All</button>
-            </div>
             ${cumulativeHtml}
           </div>
           <div class="session-item" data-session-id="${this._escapeAttr(session.sessionId)}" data-toggle-id="timeline">
@@ -245,7 +240,6 @@ export class CheckpointWebviewProvider implements vscode.WebviewViewProvider {
       <div class="checkpoint collapsed" data-checkpoint-id="${this._escapeAttr(checkpointId)}">
         <div class="checkpoint-header">
           <span class="checkpoint-time">#${index + 1} &middot; ${timeStr}</span>
-          <span class="checkpoint-count">${files.length} file${files.length !== 1 ? "s" : ""}</span>
         </div>
         <div class="checkpoint-files">
           ${filesHtml}

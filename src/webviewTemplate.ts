@@ -60,8 +60,8 @@ export function getWebviewHtml(sessionsHtml: string): string {
   .toolbar-btn svg { width: 14px; height: 14px; }
   .toolbar-btn.active {
     opacity: 1;
-    background: color-mix(in srgb, var(--vscode-textLink-foreground) 18%, transparent);
-    color: var(--vscode-textLink-foreground);
+    background: var(--vscode-inputOption-activeBackground);
+    color: var(--vscode-inputOption-activeForeground);
   }
 
   /* ── View Toggle ── */
@@ -108,8 +108,8 @@ export function getWebviewHtml(sessionsHtml: string): string {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 12.5px;
-    font-weight: 650;
+    font-size: 12px;
+    font-weight: 500;
     color: var(--vscode-foreground);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -122,11 +122,11 @@ export function getWebviewHtml(sessionsHtml: string): string {
     height: 7px;
     margin-top: 4px;
     border-radius: 50%;
-    background: var(--vscode-gitDecoration-addedResourceForeground, #73c991);
+    background: #e5e5e5;
   }
 
   .relative-time {
-    font-weight: 600;
+    font-weight: 500;
     color: var(--vscode-textLink-foreground);
   }
 
@@ -151,7 +151,6 @@ export function getWebviewHtml(sessionsHtml: string): string {
   .session-body {
     max-height: 5000px;
     overflow: hidden;
-    transition: max-height 0.3s ease, opacity 0.2s ease;
     opacity: 1;
     background: color-mix(in srgb, var(--vscode-foreground) 4%, transparent);
   }
@@ -162,16 +161,6 @@ export function getWebviewHtml(sessionsHtml: string): string {
 
   .session-item {
     margin: 6px 6px 7px 6px;
-  }
-
-  /* ── Section Label ── */
-  .section-label {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--vscode-descriptionForeground);
-    padding: 8px 12px 4px 12px;
   }
 
   /* ── Checkpoint Items ── */
@@ -197,21 +186,13 @@ export function getWebviewHtml(sessionsHtml: string): string {
   }
 
   .checkpoint-time {
-    font-size: 11.5px;
-    font-weight: 650;
+    font-size: 11px;
+    font-weight: 500;
     color: var(--vscode-foreground);
     transition: color 0.15s;
   }
   .checkpoint-header:hover .checkpoint-time {
     color: var(--vscode-textLink-foreground);
-  }
-
-  .checkpoint-count {
-    font-size: 10px;
-    padding: 1px 6px;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--vscode-foreground) 10%, transparent);
-    color: color-mix(in srgb, var(--vscode-descriptionForeground) 92%, var(--vscode-foreground) 8%);
   }
 
   .checkpoint-chevron {
@@ -227,7 +208,7 @@ export function getWebviewHtml(sessionsHtml: string): string {
   .checkpoint-files {
     max-height: 500px;
     overflow: hidden;
-    transition: max-height 0.25s ease, opacity 0.15s ease;
+    transition: max-height 0.25s ease, opacity 0.15s ease 0.08s;
     opacity: 1;
     margin-top: 3px;
     margin-left: 3px;
@@ -237,6 +218,7 @@ export function getWebviewHtml(sessionsHtml: string): string {
   .checkpoint.collapsed .checkpoint-files {
     max-height: 0;
     opacity: 0;
+    transition: max-height 0.25s ease 0.1s, opacity 0.15s ease;
   }
 
   /* ── File Items ── */
@@ -272,7 +254,7 @@ export function getWebviewHtml(sessionsHtml: string): string {
     border-radius: 8px;
     background: color-mix(in srgb, var(--vscode-gitDecoration-addedResourceForeground, #73c991) 20%, transparent);
     color: var(--vscode-gitDecoration-addedResourceForeground, #73c991);
-    font-weight: 600;
+    font-weight: 500;
   }
 
   .file-icon {
@@ -282,7 +264,7 @@ export function getWebviewHtml(sessionsHtml: string): string {
     align-items: center;
     justify-content: center;
     font-size: 10px;
-    font-weight: 700;
+    font-weight: 650;
     border-radius: 3px;
     margin-top: 1px;
   }
@@ -309,7 +291,7 @@ export function getWebviewHtml(sessionsHtml: string): string {
     text-overflow: ellipsis;
     white-space: nowrap;
     color: var(--vscode-foreground);
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.25;
   }
 
@@ -379,20 +361,20 @@ export function getWebviewHtml(sessionsHtml: string): string {
 </head>
 <body>
   <div class="toolbar">
-    <button class="toolbar-btn" id="expandAll" title="Expand All">
-      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M9 9H4v1h5V9zm0-4H4v1h5V5zm3-3H1v11h11V2zm-1 10H2V3h9v9zm2-12v1h1v11H4v-1H3v2h12V0h-2z"/></svg>
-      <span>Expand</span>
-    </button>
     <button class="toolbar-btn" id="collapseAll" title="Collapse All">
-      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M14 1H3L2 2v11l1 1h11l1-1V2l-1-1zM8 11H4v-1h4v1zm3-4H4V6h7v1z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="16" stroke-width="1.5" aria-hidden="true"><path d="M13 4v3c0 1.886 0 2.828.586 3.414S15.114 11 17 11h3m-9 9v-3c0-1.886 0-2.828-.586-3.414S8.886 13 7 13H4"/></svg>
       <span>Collapse</span>
     </button>
+    <button class="toolbar-btn" id="expandAll" title="Expand All">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="16" stroke-width="1.5" aria-hidden="true"><path d="M19 12V9c0-1.886 0-2.828-.586-3.414S16.886 5 15 5h-3m-7 7v3c0 1.886 0 2.828.586 3.414S7.114 19 9 19h3"/></svg>
+      <span>Expand</span>
+    </button>
     <button class="toolbar-btn" id="fileBtn" title="File">
-      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M14 1H3L2 2v11l1 1h11l1-1V2l-1-1zM8 11H4v-1h4v1zm3-4H4V6h7v1z"/></svg>
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15 11a3 3 0 0 1-3-3V4H8a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-8zm-2-3a2 2 0 0 0 2 2h3.59L13 4.41zM8 3h5l7 7v9a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m0 21a5 5 0 0 1-5-5V7h1v12a4 4 0 0 0 4 4h8v1z"/></svg>
       <span>File</span>
     </button>
     <button class="toolbar-btn" id="checkpointBtn" title="Checkpoint">
-      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M14 1H3L2 2v11l1 1h11l1-1V2l-1-1zM8 11H4v-1h4v1zm3-4H4V6h7v1z"/></svg>
+      <svg viewBox="0 0 36 36" fill="currentColor" aria-hidden="true"><path d="M10 18c0-1.3-.8-2.4-2-2.8v-3.4c1.2-.4 2-1.5 2-2.8c0-1.7-1.3-3-3-3S4 7.3 4 9c0 1.3.8 2.4 2 2.8v3.4c-1.2.4-2 1.5-2 2.8s.8 2.4 2 2.8v3.4c-1.2.4-2 1.5-2 2.8c0 1.7 1.3 3 3 3s3-1.3 3-3c0-1.3-.8-2.4-2-2.8v-3.4c1.2-.4 2-1.5 2-2.8m21-8H15c-.6 0-1-.4-1-1s.4-1 1-1h16c.6 0 1 .4 1 1s-.4 1-1 1m0 9H15c-.6 0-1-.4-1-1s.4-1 1-1h16c.6 0 1 .4 1 1s-.4 1-1 1m0 9H15c-.6 0-1-.4-1-1s.4-1 1-1h16c.6 0 1 .4 1 1s-.4 1-1 1"/></svg>
       <span>Checkpoint</span>
     </button>
   </div>

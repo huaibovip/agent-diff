@@ -1,8 +1,8 @@
-# Agnet Differ
+# Agent Diff
 
 Review all file changes made by Claude Code sessions with diffs and one-click revert.
 
-![Agnet Differ](resources/screenshot.png)
+![Agent Diff](resources/icon-color.png)
 
 ## Features
 

@@ -1,4 +1,4 @@
-# Agnet Differ - VS Code Extension
+# Agent Diff - VS Code Extension
 
 ## Overview
 A VS Code extension that reads Claude Code's checkpoint/rewind data and presents it in a visual panel for reviewing file changes, viewing diffs, and reverting.
@@ -33,11 +33,11 @@ A VS Code extension that reads Claude Code's checkpoint/rewind data and presents
 - **Session title extraction** — Uses first real user message (strips `<ide_opened_file>` and `<system-reminder>` tags), falls back to slug, then session ID
 
 ### Commands
-- `AgnetDiffer.refresh` — Manual refresh
-- `AgnetDiffer.viewDiffData` — Open diff. Cumulative: first backup vs current. Timeline: checkpoint vs next checkpoint (or vs current with "(may include later edits)" label if last checkpoint).
-- `AgnetDiffer.restoreFileData` — Restore a modified file to its checkpoint state
-- `AgnetDiffer.deleteFileData` — Delete a file that was created by Claude (with empty-directory notice)
-- `AgnetDiffer.revertAllData` — Revert all files in a session (restore modified + delete created). Only marks successfully reverted files.
+- `AgentDiff.refresh` — Manual refresh
+- `AgentDiff.viewDiffData` — Open diff. Cumulative: first backup vs current. Timeline: checkpoint vs next checkpoint (or vs current with "(may include later edits)" label if last checkpoint).
+- `AgentDiff.restoreFileData` — Restore a modified file to its checkpoint state
+- `AgentDiff.deleteFileData` — Delete a file that was created by Claude (with empty-directory notice)
+- `AgentDiff.revertAllData` — Revert all files in a session (restore modified + delete created). Only marks successfully reverted files.
 
 ### File Status Icons
 - `A` (green) — File was created by Claude
@@ -60,7 +60,7 @@ npx @vscode/vsce package # Create .vsix
 
 ### Marketplace
 - Publisher: `Huaibo`
-- Identifier: `Huaibo.agent-differ`
+- Identifier: `huaibo.agent-diff`
 - Upload new versions at: https://marketplace.visualstudio.com/manage/publishers/huaibo
 - Bump version in `package.json` before each upload
 

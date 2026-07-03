@@ -1,13 +1,13 @@
 {
-  "name": "agent-differ",
-  "displayName": "Agnet Differ",
+  "name": "agent-diff",
+  "displayName": "Agent Diff",
   "description": "Review all file changes made by Claude Code sessions with diffs and one-click revert",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "Huaibo",
-  "icon": "resources/icon.png",
+  "icon": "resources/icon-color.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/panfotis/agent-differ"
+    "url": "https://github.com/huaibo/agent-diff"
   },
   "engines": {
     "vscode": "^1.85.0"
@@ -27,46 +27,44 @@
     "changes"
   ],
   "main": "./out/extension.js",
-  "activationEvents": [
-    "onView:AgnetDiffer"
-  ],
   "contributes": {
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "agent-differ",
-          "title": "Agnet Differ",
+          "id": "agent-diff",
+          "title": "Agent Diff",
           "icon": "resources/icon.svg"
         }
       ]
     },
     "views": {
-      "agent-differ": [
+      "agent-diff": [
         {
-          "id": "AgnetDiffer",
-          "name": "Changes",
-          "type": "webview"
+          "id": "AgentDiff",
+          "name": "Agent Diff",
+          "type": "webview",
+          "icon": "resources/icon.svg"
         }
       ]
     },
     "commands": [
       {
-        "command": "AgnetDiffer.refresh",
+        "command": "AgentDiff.refresh",
         "title": "Refresh Changes",
         "icon": "$(refresh)"
       },
       {
-        "command": "AgnetDiffer.viewDiff",
+        "command": "AgentDiff.viewDiff",
         "title": "View Changes",
         "icon": "$(diff)"
       },
       {
-        "command": "AgnetDiffer.viewFile",
+        "command": "AgentDiff.viewFile",
         "title": "View File",
         "icon": "$(file)"
       },
       {
-        "command": "AgnetDiffer.restoreFile",
+        "command": "AgentDiff.restoreFile",
         "title": "Restore File",
         "icon": "$(discard)"
       }
@@ -74,24 +72,24 @@
     "menus": {
       "view/title": [
         {
-          "command": "AgnetDiffer.refresh",
-          "when": "view == AgnetDiffer",
+          "command": "AgentDiff.refresh",
+          "when": "view == AgentDiff",
           "group": "navigation"
         }
       ],
       "view/item/context": [
         {
-          "command": "AgnetDiffer.viewDiff",
-          "when": "view == AgnetDiffer && viewItem == checkpointFile",
+          "command": "AgentDiff.viewDiff",
+          "when": "view == AgentDiff && viewItem == checkpointFile",
           "group": "inline"
         },
         {
-          "command": "AgnetDiffer.viewFile",
-          "when": "view == AgnetDiffer && viewItem == checkpointFile"
+          "command": "AgentDiff.viewFile",
+          "when": "view == AgentDiff && viewItem == checkpointFile"
         },
         {
-          "command": "AgnetDiffer.restoreFile",
-          "when": "view == AgnetDiffer && viewItem == checkpointFile"
+          "command": "AgentDiff.restoreFile",
+          "when": "view == AgentDiff && viewItem == checkpointFile"
         }
       ]
     }
